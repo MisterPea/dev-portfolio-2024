@@ -1,0 +1,42 @@
+@import "./mixins.scss";
+@import "./header.scss";
+@import "./infoTag.scss";
+@import "./projectCard.scss";
+@import "./page.scss";
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: var(--font-lausanne);
+}
+
+body,
+h1,
+h2,
+ul,
+li,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+:root {
+  --dark-1: #1d1d1f;
+  --dark-2: #424244;
+  --dark-3: #595959;
+}

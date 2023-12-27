@@ -1,0 +1,9 @@
+@import './mixins.scss';
+
+.main_wrap {
+  margin: 0 1rem;
+  max-width: 1000px;
+  @include desktop {
+    margin: 0 auto;
+  }
+}
