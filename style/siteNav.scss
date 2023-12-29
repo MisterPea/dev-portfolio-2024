@@ -1,0 +1,21 @@
+.site_nav ul {
+  display: flex;
+  font-weight: 600;
+  font-size: 0.875rem;
+  align-items: center;
+
+  li:last-child {
+    margin-left: 1.25rem;
+  }
+  li {
+    padding: 0.25rem 0.25rem;
+    position: relative;
+  }
+  a {
+    color: var(--dark-4);
+    height: fit-content;
+  }
+  @include tablet-begin {
+    font-size: 1rem;
+  }
+}
