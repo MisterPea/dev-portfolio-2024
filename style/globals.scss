@@ -3,6 +3,7 @@
 @import "./infoTag.scss";
 @import "./projectCard.scss";
 @import "./page.scss";
+@import "./siteNav.scss";
 
 html {
   box-sizing: border-box;
@@ -39,4 +40,5 @@ li {
   --dark-1: #1d1d1f;
   --dark-2: #424244;
   --dark-3: #595959;
+  --dark-4: rgb(123, 123, 123);
 }

@@ -1,9 +1,40 @@
-@import './mixins.scss';
+@import "./mixins.scss";
 
 .main_wrap {
-  margin: 0 1rem;
-  max-width: 1000px;
-  @include desktop {
+  padding: 0 1rem;
+  transition: padding 225ms ease;
+  .project_card_wrap {
     margin: 0 auto;
+    width: fit-content;
+    transform: translateY(inherit);
+  }
+
+  @include tablet-begin {
+    padding: 0 3rem;
+
+    .project_card_wrap {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      transform: translateY(16rem);
+      li {
+        grid-column: 2 / -1;
+        grid-row: auto;
+      }
+    }
+    @include tablet {
+      padding: 0;
+      .project_card_wrap {
+        transform: translateY(11.5rem);
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(17, 1fr);
+        li {
+          grid-column: 9 / 16;
+          grid-row: auto;
+        }
+      }
+    }
   }
 }

@@ -1,9 +1,16 @@
 $mobile-vert: 600px;
-$tablet:920px;
+$tablet-begin: 760px;
+$tablet: 950px;
 $desktop: 1024px;
 
 @mixin tablet-and-above {
-  @media only screen and (min-width: #{$mobile-vert}){
+  @media only screen and (min-width: #{$mobile-vert}) {
+    @content;
+  }
+}
+
+@mixin tablet-begin {
+  @media only screen and (min-width: #{$tablet-begin}) {
     @content;
   }
 }
@@ -18,4 +25,16 @@ $desktop: 1024px;
   @media only screen and (min-width: #{$desktop}) {
     @content;
   }
+}
+
+@mixin milk-blur {
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+@mixin unset-milk-blur {
+  background-color: unset;
+  -webkit-backdrop-filter: none;
+  backdrop-filter:none;
 }
