@@ -8,13 +8,35 @@
     margin-left: 1.25rem;
   }
   li {
-    padding: 0.25rem 0.25rem;
     position: relative;
+    display: inline-block;
   }
   a {
+    pointer-events: all;
+    display: block;
+    padding: 0.5rem 0.9rem;
     color: var(--dark-4);
     height: fit-content;
   }
+
+  li::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1.5px;
+    left: 0;
+    bottom: 0;
+    background-color: var(--golden);
+    transform-origin: bottom right;
+    transition: transform 400ms cubic-bezier(0, 0.80, 0.20, 1);
+  }
+
+  li:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
   @include tablet-begin {
     font-size: 1rem;
   }
