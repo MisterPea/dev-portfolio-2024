@@ -1,0 +1,47 @@
+@import "./mixins.scss";
+
+.app_wrap {
+  padding: 0 1rem;
+  .project_card_wrap {
+    margin: 0 auto;
+    width: fit-content;
+    display: grid;
+    grid-row: auto;
+    gap: 5rem 0;
+    transform: translateY(inherit);
+  }
+
+  @include tablet-begin {
+    padding: 0 3rem;
+    .project_card_wrap {
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6rem 10px;
+      transform: translateY(16rem);
+      li {
+        grid-column: 2 / -1;
+        grid-row: auto;
+      }
+    }
+    @include tablet {
+      padding: 0;
+      position: relative;
+      display: block;
+      margin: 0 auto;
+      width: fit-content;
+      .project_card_wrap {
+ 
+        transform: translateY(10.5rem);
+        width: 100%;
+        display: grid;
+        gap: 7rem 10px;
+        grid-template-columns: repeat(17, minmax(4rem, 5rem));
+        li {
+          grid-column: 9 / 16;
+          grid-row: auto;
+        }
+      }
+    }
+  }
+}

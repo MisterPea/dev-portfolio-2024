@@ -1,0 +1,144 @@
+[
+  {
+    "slug": "the-times-pilot",
+    "title": "the.times.pilot: Tailoring Your NY Times Digest",
+    "image_url": {
+      "defaultImage":{
+        "alt":"3-up image of the proposed Circuit Mobile App",
+        "img":"/images/nyt_pilot_img/nyt_pilotLarge_1x.webp"
+      },
+      "imageSource":[
+        {
+          "minWidth":"0px",
+          "images":"/images/nyt_pilot_img/nyt_pilotLarge_1x.webp 1x, /images/nyt_pilot_img/nyt_pilotLarge_2x.webp 2x, /images/nyt_pilot_img/nyt_pilotLarge_3x.webp 3x"
+        },
+        {
+          "minWidth":"760px",
+          "images":"/images/nyt_pilot_img/nyt_pilotSmall_1x.webp 1x, /images/nyt_pilot_img/nyt_pilotSmall_2x.webp 2x, /images/nyt_pilot_img/nyt_pilotSmall_3x.webp 3x"
+        }
+      ]
+    },
+    "description": "Effortlessly gather and get important stories through a personalized news aggregator and daily email subscription.",
+    "stack": [
+      "Figma",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Storybook",
+      "SCSS",
+      "NoSQL",
+      "Twilio SendGrid"
+    ],
+    "long_description": "Seamlessly curate and receive the stories that matter to you with a custom news aggregator and subscriber-focused daily email service.",
+    "tools": [
+      "Figma",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Storybook",
+      "SCSS",
+      "Firebase NoSQL",
+      "GCP Cloud Functions",
+      "GCP Cloud Scheduler",
+      "Twilio SendGrid"
+    ],
+    "links": [
+      "https://github.com/MisterPea/times-pilot"
+    ],
+    "summary": "the.times.pilot aims to improve the news consumption experience by offering a personalized, accessible, and navigable platform that leverages the New York Times Top-Stories API. It addresses the lack of personalization and a one-size-fits-all approach present in the news media, specifically for The New York Times readers.",
+    "summary_color": "rgba(204, 255, 0, 0.45)",
+    "main_section": [
+      {
+        "title": "Problem:",
+        "body": "Despite the New York Times's devotion to world-class journalism and forward-looking user experiences, users struggle with the time commitment required to sift through the various sections and placement hierarchies to find stories that match their interests. Additionally, there's an absence of customizability in the daily top-stories emails.",
+        "list_items": []
+      },
+      {
+        "title": "User Research:",
+        "body": "Investigations reveal users' frustration with being forced to browse through topics they felt to be overwhelming, and often depressing. The research highlighted a desire for a more tailored news / news email experience.",
+        "list_items": []
+      },
+      {
+        "title": "Goals / Objectives:",
+        "body": "The primary goal of the.times.pilot is to develop a user-centered news platform that allows users to:",
+        "list_items": [
+          "Quickly grasp top stories at a glance.",
+          "Customize topics in their daily email digest.",
+          "Select preferred news sections for their main navigation."
+        ]
+      },
+      {
+        "title": "Solution Overview:",
+        "body": "the.times.pilot proposes a mobile-first website that allows users to:",
+        "list_items": [
+          "Tailor what sections they have access to. If they prefer not to see a certain section (or number or sections) they have the ability to make that choice.",
+          "Navigate news sections within a flattened hierarchy. That is to say, there is no distinction between what is a main story and what would be relegated to a columnar story.",
+          "Subscribe to topics within articles for daily email digests.",
+          "Bookmark stories for later reading.",
+          "Have easy access to modify user settings, including email, password, and news-section preferences."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "circuit-app",
+    "title": "Circuit: Revolutionizing Time Management for Creatives",
+    "image_url": {
+      "defaultImage":{
+        "alt":"3-up image of the proposed Circuit Mobile App",
+        "img":"/images/circuit_img/circuitLarge_1x.webp"
+      },
+      "imageSource":[
+        {
+          "minWidth":"0px",
+          "images":"/images/circuit_img/circuitLarge_1x.webp 1x, /images/circuit_img/circuitLarge_2x.webp 2x, /images/circuit_img/circuitLarge_3x.webp 3x"
+        },
+        {
+          "minWidth":"760px",
+          "images":"/images/circuit_img/circuitSmall_1x.webp 1x, /images/circuit_img/circuitSmall_2x.webp 2x, /images/circuit_img/circuitSmall_3x.webp 3x"
+        }
+      ]
+    },
+    "description": "An iOS app to empower creative minds by bettering focus and eliminating burnout.",
+    "stack": [
+      "Figma",
+      "Photoshop"
+    ],
+    "long_description": "An iOS app to empower creative minds by bettering focus and eliminating burnout.",
+    "tools": [
+      "Figma",
+      "Photoshop"
+    ],
+    "links": [
+      "https://to-come.html"
+    ],
+    "summary": "Circuit App is designed to address the unique time management challenges faced by creative professionals. It offers users a way to deal with the contradictory issues of distraction mitigation and preventing burnout from overworking. By structuring time into focused work periods and restful breaks, Circuit App aims to enhance productivity and creativity, while reducing stress and mental exhaustion.",
+    "summary_color": "rgba(254, 135, 36, 0.15)",
+    "main_section": [
+      {
+        "title": "Problem:",
+        "body": "Creative professionals (and the larger public in general) are often grappling with contrasting challenges: the lure of distractions, including social media and meetings, and a tendency to work for extended periods without breaks, leading to mental fatigue. Maintaining a balance is a crucial aspect in avoiding burnout and general well-being.",
+        "list_items": []
+      },
+      {
+        "title": "User Research:",
+        "body": "We find that time management exerts enormous gravity in the life of a creative. It has a significant impact on the productivity and stress levels of creatives, and is a constant source of tension. They often struggle with balancing project deadlines, learning new technologies, and managing the distractions of a digital environment. The need for a solution that helps navigate these challenges efficiently is evident.",
+        "list_items": []
+      },
+      {
+        "title": "Goals / Objectives:",
+        "body": "The primary goal of Circuit App is to give users a path to organizing time into discrete blocks of time. In doing so the user can capitalize their innate pairing or concentration and rest.",
+        "list_items": []
+      },
+      {
+        "title": "Solution Overview:",
+        "body": "Circuit App proposes a mobile app that allows users to:",
+        "list_items": [
+          "Assign a block of time to a task.",
+          "Keep track of their progress through a built-in calendar.",
+          "Share their progress if they want."
+        ]
+      }
+    ]
+  }
+]
