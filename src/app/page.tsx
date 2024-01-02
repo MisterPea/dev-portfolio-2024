@@ -1,23 +1,21 @@
-import Header from './components/Header';
 import ProjectCard from './components/ProjectCard';
+import siteContent from "./siteContent.json";
 
 export default function Home() {
+
   return (
     <main className='main_wrap'>
-      <Header />
       <ul className='project_card_wrap'>
-        <li className='project_card-li'>
-          <ProjectCard title='the.times.pilot: Tailoring Your NY Times Digest'
-            desc='Effortlessly gather and get important stories through a personalized news aggregator and daily email subscription.'
-            stack={['Figma', 'TypeScript', 'React', 'Next.js', 'Storybook', 'SCSS', 'NoSQL', 'Twilio SendGrid']}
-          />
-        </li>
-        <li className='project_card-li'>
-          <ProjectCard title='the.times.pilot: Tailoring Your NY Times Digest'
-            desc='Effortlessly gather and get important stories through a personalized news aggregator and daily email subscription.'
-            stack={['Figma', 'TypeScript', 'React', 'Next.js', 'Storybook', 'SCSS', 'NoSQL', 'Twilio SendGrid']}
-          />
-        </li>
+        {siteContent.map(({ title, stack, slug, description, image_url }, index) => (
+          <li className='project_card-li' key={`${index}-${slug}`}>
+            <ProjectCard title={title}
+              desc={description}
+              stack={stack}
+              slug={slug}
+              image={image_url}
+            />
+          </li>
+        ))}
       </ul>
     </main>
   );

@@ -1,6 +1,6 @@
 @import "./mixins.scss";
 
-.main_wrap {
+.app_wrap {
   padding: 0 1rem;
   .project_card_wrap {
     margin: 0 auto;
@@ -30,9 +30,10 @@
       display: block;
       margin: 0 auto;
       width: fit-content;
+      max-width: 100%;
       .project_card_wrap {
  
-        transform: translateY(11.5rem);
+        transform: translateY(10.5rem);
         width: 100%;
         display: grid;
         gap: 7rem 10px;

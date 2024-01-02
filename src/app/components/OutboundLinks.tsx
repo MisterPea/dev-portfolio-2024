@@ -47,6 +47,7 @@ export default function OutboundLinks(this: any, { isFooter }: OutboundLinksProp
   return (
     <ul className={isFooter ? 'footer_links' : 'main_header-outbound_links'}>
       <li
+        tabIndex={0}
         className="outbound_li"
         onKeyDown={handleEnterDown.bind(this, { route: 'https://github.com/MisterPea' })}
         onClick={buttonClick.bind(this, 'https://github.com/MisterPea')}
@@ -54,14 +55,18 @@ export default function OutboundLinks(this: any, { isFooter }: OutboundLinksProp
       >
         <LinkIcon icon='github' />
       </li>
-      <li className='outbound_li'
+      <li 
+        tabIndex={0}
+        className='outbound_li'
         onKeyDown={handleEnterDown.bind(this, { route: 'https://www.linkedin.com/in/perry-angelora/' })}
         onClick={buttonClick.bind(this, 'https://www.linkedin.com/in/perry-angelora/')}
         role='link'
       >
         <LinkIcon icon='linkedIn' />
       </li>
-      <li className='outbound_li'
+      <li 
+        tabIndex={0}
+        className='outbound_li'
         onKeyDown={handleEnterDown.bind(this, { route: emailClick })}
         onClick={emailClick}
         role='link'

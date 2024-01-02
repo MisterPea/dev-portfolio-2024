@@ -1,11 +1,16 @@
 import Link from "next/link";
 
-export default function SiteNav() {
+interface SiteNavProps {
+  activeLink?: string;
+}
+
+export default function SiteNav({ activeLink }: SiteNavProps) {
+
   return (
     <nav className="site_nav">
       <ul>
-        <li><Link href='#'>Work</Link></li>
-        <li><Link href='#'>About</Link></li>
+        <li className={`site_nav-li site_nav-li${activeLink === 'main' ? '--active' : ''}`}><Link href='/'>Work</Link></li>
+        <li className={`site_nav-li site_nav-li${activeLink === 'about' ? '--active' : ''}`}><Link href='#'>About</Link></li>
       </ul>
     </nav>
   );

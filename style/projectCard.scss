@@ -41,7 +41,7 @@
     font-weight: 600;
     color: var(--dark-2);
     font-size: 0.8rem;
-    transform: translateX(1rem);
+    transform: translateX(0.3rem);
     transition: all 400ms cubic-bezier(0.86,0,0.07,1);;
     &-arrow {
       transition: opacity 400ms cubic-bezier(0.86,0,0.07,1);;
@@ -56,15 +56,18 @@
     width: 100%;
     display: block;
     padding-bottom: 70%;
-    background-color: gray;
+    // background-color: gray;
     z-index: 10;
+    img {
+      max-width: 100%;
+    }
   }
 }
 
 .project_card:hover {
   .project_card-cta {
     color: var(--golden);
-    transform: translateX(0);
+    transform: translateX(-0.2rem);
     &-arrow {
       opacity: 1;
     }
