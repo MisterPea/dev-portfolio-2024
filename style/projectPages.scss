@@ -1,111 +1,48 @@
 @import "./mixins.scss";
 
 .project_page {
-  // root styles
-  position: relative;
-  h2 {
-    font-size: 1rem;
-    font-weight: 600;
+  h1 {
+    font-size: 1.25rem;
     color: var(--dark-2);
   }
   section {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin: 1rem 0;
+    margin: 1.5rem 0 0.5rem;
   }
 
-  &-rule {
-    border-top: 0.75px solid var(--dark-3);
-    padding-bottom: 0.5rem;
-  }
-
-  // end root styles
-  /* ******************** Header ******************** */
-  &-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    &-image_outer {
-      margin: 0 auto;
-      width: 60%;
-    }
-    &-image_inner {
-      background-color: rgb(153, 153, 153);
-      position: relative;
-      width: 100%;
-      display: block;
-      padding-bottom: 70%;
-    }
-  }
-
-  section p,
-  li {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: var(--dark-2);
-    line-height: 1.125rem;
-    letter-spacing: 0.0175rem;
-  }
-
-  &-title {
-    font-weight: 600;
+  h2 {
     font-size: 1.125rem;
-    color: var(--dark-1);
-  }
-  &-description {
-    margin: 0.25rem 0;
-    font-size: 0.875rem;
-    font-weight: 300;
-    line-height: 1.125rem;
-    letter-spacing: 0.0175rem;
     color: var(--dark-2);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  a {
+    color: var(--dark-2);
+    text-decoration: underline;
+  }
+  p,
+  li {
+    font-size: 0.9rem;
+    line-height: 1.45rem;
+    letter-spacing: 0.05rem;
+    font-weight: 300;
+    color: var(--dark-3);
   }
 
-  .links {
-    ul {
-      list-style: outside;
-      padding-left: 1rem;
-    }
-    a {
-      color: var(--dark-2);
-      text-decoration: underline;
-    }
+  ul {
+    padding-left: 1rem;
+  }
+
+  li {
+    margin: 0.5rem 0;
   }
 
   .summary {
     padding: 1rem;
-    margin: 0 -1rem;
+    margin: 1.25rem -1rem 0;
     gap: 0.5rem;
   }
 
-  /* ****************** Main Section ****************** */
-  &-main_section {
-    p {
-      margin: 0.25rem 0;
-    }
-    &:not(:has(p)) {
-      // if there's no <p> we add in extra margin
-      ul {
-        margin: 0.25rem 0;
-      }
-    }
-    ul {
-      list-style: outside;
-      padding-left: 1rem;
-      li {
-        margin: 0.5rem 0;
-        line-height: 1.125rem;
-        color: var(--dark-3);
-      }
-      li:first-child {
-        margin: 0;
-      }
-    }
-  }
-
-  /* ****************** Color Scheme ****************** */
-
+  // /* ****************** Color Scheme ****************** */
   &-color_section-colors {
     margin-top: 0.5rem;
     display: grid;
@@ -164,13 +101,11 @@
     }
   }
   &-fonts_section {
-    padding-top: 1rem;
-  
     .font_group {
       &:first-of-type {
         margin-top: 0.25rem;
       }
-      margin: 0.25rem 0 ;
+      margin: 0.25rem 0;
     }
     .font_group-svg_wrap {
       &.size_1 {
