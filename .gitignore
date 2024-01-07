@@ -33,3 +33,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 working_images/*
+public/images/circuit_img/nextImageExportOptimizer/*
+public/images/nyt_pilot_img/nextImageExportOptimizer/*
