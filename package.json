@@ -5,11 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build && next export && next-image-export-optimizer",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "next": "14.0.4",
+    "next-image-export-optimizer": "^1.12.0",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0"

@@ -3,18 +3,20 @@
     "slug": "the-times-pilot",
     "title": "the.times.pilot: Tailoring Your NY Times Digest",
     "image_url": {
-      "defaultImage":{
-        "alt":"3-up image of the proposed Circuit Mobile App",
-        "img":"/images/nyt_pilot_img/nyt_pilotLarge_1x.webp"
+      "defaultImage": {
+        "alt": "3-up image of the proposed Circuit Mobile App",
+        "img": "/images/nyt_pilot_img/nyt_pilot.webp"
       },
-      "imageSource":[
+      "imageSource": [
         {
-          "minWidth":"0px",
-          "images":"/images/nyt_pilot_img/nyt_pilotLarge_1x.webp 1x, /images/nyt_pilot_img/nyt_pilotLarge_2x.webp 2x, /images/nyt_pilot_img/nyt_pilotLarge_3x.webp 3x"
+          "minWidth": null,
+          "maxWidth": 760,
+          "images": "/images/nyt_pilot_img/nyt_pilotLarge_1x.webp 1x, /images/nyt_pilot_img/nyt_pilotLarge_2x.webp 2x, /images/nyt_pilot_img/nyt_pilotLarge_3x.webp 3x"
         },
         {
-          "minWidth":"760px",
-          "images":"/images/nyt_pilot_img/nyt_pilotSmall_1x.webp 1x, /images/nyt_pilot_img/nyt_pilotSmall_2x.webp 2x, /images/nyt_pilot_img/nyt_pilotSmall_3x.webp 3x"
+          "minWidth": 761,
+          "maxWidth": null,
+          "images": "/images/nyt_pilot_img/nyt_pilotSmall_1x.webp 1x, /images/nyt_pilot_img/nyt_pilotSmall_2x.webp 2x, /images/nyt_pilot_img/nyt_pilotSmall_3x.webp 3x"
         }
       ]
     },
@@ -84,18 +86,20 @@
     "slug": "circuit-app",
     "title": "Circuit: Revolutionizing Time Management for Creatives",
     "image_url": {
-      "defaultImage":{
-        "alt":"3-up image of the proposed Circuit Mobile App",
-        "img":"/images/circuit_img/circuitLarge_1x.webp"
+      "defaultImage": {
+        "alt": "3-up image of the proposed Circuit Mobile App",
+        "img": "/images/circuit_img/circuit.webp"
       },
-      "imageSource":[
+      "imageSource": [
         {
-          "minWidth":"0px",
-          "images":"/images/circuit_img/circuitLarge_1x.webp 1x, /images/circuit_img/circuitLarge_2x.webp 2x, /images/circuit_img/circuitLarge_3x.webp 3x"
+          "minWidth": null,
+          "maxWidth": 760,
+          "images": "/images/circuit_img/circuitLarge_1x.webp 1x, /images/circuit_img/circuitLarge_2x.webp 2x, /images/circuit_img/circuitLarge_3x.webp 3x"
         },
         {
-          "minWidth":"760px",
-          "images":"/images/circuit_img/circuitSmall_1x.webp 1x, /images/circuit_img/circuitSmall_2x.webp 2x, /images/circuit_img/circuitSmall_3x.webp 3x"
+          "minWidth": 761,
+          "maxWidth": null,
+          "images": "/images/circuit_img/circuitSmall_1x.webp 1x, /images/circuit_img/circuitSmall_2x.webp 2x, /images/circuit_img/circuitSmall_3x.webp 3x"
         }
       ]
     },

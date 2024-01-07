@@ -123,12 +123,14 @@
 
 // Outbound link hovers
 .outbound_li {
+  list-style: none;
   cursor: pointer;
   pointer-events: all;
 }
 
 @media (hover: hover) {
   .outbound_li {
+    list-style: none;
     position: relative;
     background-color: #ffffff;
     /* 

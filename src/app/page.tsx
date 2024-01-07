@@ -5,6 +5,7 @@ export default function Home() {
 
   return (
     <main className='main_wrap'>
+     
       <ul className='project_card_wrap'>
         {siteContent.map(({ title, stack, slug, description, image_url }, index) => (
           <li className='project_card-li' key={`${index}-${slug}`}>

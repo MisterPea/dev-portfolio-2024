@@ -1,8 +1,14 @@
 $mobile-vert: 600px;
-$tablet-begin: 760px;
+$tablet-begin: 767px;
 // $tablet: 985px;
 $tablet: 1100px;
 $desktop: 1024px;
+
+@mixin hi-dpi-mobile {
+  @media (min-resolution: 192dpi) and (max-width: 767px) and (max-device-width: 767px) {
+    @content;
+  }
+}
 
 @mixin tablet-and-above {
   @media only screen and (min-width: #{$mobile-vert}) {

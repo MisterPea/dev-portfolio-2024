@@ -4,6 +4,8 @@
 @import "./projectCard.scss";
 @import "./page.scss";
 @import "./siteNav.scss";
+@import "./projectPages.scss";
+@import "./imageViewer.scss";
 
 html {
   box-sizing: border-box;
@@ -30,10 +32,6 @@ p {
 
 a {
   text-decoration: none;
-}
-
-li {
-  list-style: none;
 }
 
 :root {

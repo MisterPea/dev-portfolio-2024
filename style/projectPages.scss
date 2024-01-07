@@ -6,7 +6,8 @@
     color: var(--dark-2);
   }
   section {
-    margin: 1.5rem 0 0.5rem;
+    // background-color: rgba(34, 139, 34, 0.312);
+    margin: 1rem 0;
   }
 
   h2 {
@@ -28,7 +29,7 @@
     color: var(--dark-3);
   }
 
-  ul {
+  ul:not(.image_viewer-ul) {
     padding-left: 1rem;
   }
 
@@ -41,6 +42,12 @@
     margin: 1.25rem -1rem 0;
     gap: 0.5rem;
   }
+
+  // .rule {
+  //   width: 100%;
+  //   border-top: 1px solid var(--dark-3);
+  //   margin-top: 1rem;
+  // }
 
   // /* ****************** Color Scheme ****************** */
   &-color_section-colors {
@@ -56,10 +63,13 @@
       }
       &-square {
         padding-top: 100%;
+        width: calc(100% + 10px);
+        height: 100%;
         border: 0.25px solid rgba(0, 0, 0, 0.6);
         border-radius: 0.2rem;
       }
       &-text_group {
+        margin-left: 10px;
         display: grid;
         grid-template-rows: repeat(add, 1fr);
         align-items: center;

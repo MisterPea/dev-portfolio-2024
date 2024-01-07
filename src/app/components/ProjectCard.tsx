@@ -2,6 +2,8 @@ import Link from "next/link";
 import InfoTag from "./InfoTag";
 import createId from "./createId";
 import SingleImage from "./SingleImage";
+import ExportedImage from "next-image-export-optimizer";
+
 
 interface ProjectCardProps {
   title: string;
@@ -29,7 +31,8 @@ export default function ProjectCard({ title, desc, stack, slug, image }: Project
         </div>
         <div className="project_card-image_wrap">
           <div className="image-placeholder">
-            <SingleImage imageSource={imageSource} defaultImage={defaultImage.img} altText={defaultImage.alt} />
+            <ExportedImage src={defaultImage.img} alt={defaultImage.alt} fill />
+            {/* <SingleImage imageSource={imageSource} defaultImage={defaultImage.img} altText={defaultImage.alt} /> */}
           </div>
           <p className="project_card-cta">View Case Study <span className="project_card-cta-arrow"> →</span></p>
         </div>
