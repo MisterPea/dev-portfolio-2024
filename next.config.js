@@ -12,6 +12,7 @@ const nextConfig = {
     nextImageExportOptimizer_exportFolderPath: "out",
     nextImageExportOptimizer_quality: "75",
     nextImageExportOptimizer_storePicturesInWEBP: "true",
+    nextImageExportOptimizer_blurSize: "[10]",
     nextImageExportOptimizer_exportFolderName: "nextImageExportOptimizer",
     nextImageExportOptimizer_generateAndUseBlurImages: "true",
   }

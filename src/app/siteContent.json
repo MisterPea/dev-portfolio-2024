@@ -4,21 +4,9 @@
     "title": "the.times.pilot: Tailoring Your NY Times Digest",
     "image_url": {
       "defaultImage": {
-        "alt": "3-up image of the proposed Circuit Mobile App",
+        "alt": "The times.pilot app shown on desktop and mobile devices",
         "img": "/images/nyt_pilot_img/nyt_pilot.webp"
-      },
-      "imageSource": [
-        {
-          "minWidth": null,
-          "maxWidth": 760,
-          "images": "/images/nyt_pilot_img/nyt_pilotLarge_1x.webp 1x, /images/nyt_pilot_img/nyt_pilotLarge_2x.webp 2x, /images/nyt_pilot_img/nyt_pilotLarge_3x.webp 3x"
-        },
-        {
-          "minWidth": 761,
-          "maxWidth": null,
-          "images": "/images/nyt_pilot_img/nyt_pilotSmall_1x.webp 1x, /images/nyt_pilot_img/nyt_pilotSmall_2x.webp 2x, /images/nyt_pilot_img/nyt_pilotSmall_3x.webp 3x"
-        }
-      ]
+      }
     },
     "description": "Effortlessly gather and get important stories through a personalized news aggregator and daily email subscription.",
     "stack": [
@@ -32,6 +20,10 @@
       "Twilio SendGrid"
     ],
     "long_description": "Seamlessly curate and receive the stories that matter to you with a custom news aggregator and subscriber-focused daily email service.",
+    "hero": {
+      "alt": "The times.pilot app shown on desktop and mobile devices",
+      "img": "/images/nyt_pilot_img/nyt_pilot.webp"
+    },
     "tools": [
       "Figma",
       "TypeScript",
@@ -48,7 +40,7 @@
       "https://github.com/MisterPea/times-pilot"
     ],
     "summary": "the.times.pilot aims to improve the news consumption experience by offering a personalized, accessible, and navigable platform that leverages the New York Times Top-Stories API. It addresses the lack of personalization and a one-size-fits-all approach present in the news media, specifically for The New York Times readers.",
-    "summary_color": "rgba(204, 255, 0, 0.45)",
+    "summary_color": "rgba(204, 255, 0, 0.6)",
     "main_section": [
       {
         "title": "Problem:",
@@ -89,19 +81,7 @@
       "defaultImage": {
         "alt": "3-up image of the proposed Circuit Mobile App",
         "img": "/images/circuit_img/circuit.webp"
-      },
-      "imageSource": [
-        {
-          "minWidth": null,
-          "maxWidth": 760,
-          "images": "/images/circuit_img/circuitLarge_1x.webp 1x, /images/circuit_img/circuitLarge_2x.webp 2x, /images/circuit_img/circuitLarge_3x.webp 3x"
-        },
-        {
-          "minWidth": 761,
-          "maxWidth": null,
-          "images": "/images/circuit_img/circuitSmall_1x.webp 1x, /images/circuit_img/circuitSmall_2x.webp 2x, /images/circuit_img/circuitSmall_3x.webp 3x"
-        }
-      ]
+      }
     },
     "description": "An iOS app to empower creative minds by bettering focus and eliminating burnout.",
     "stack": [
@@ -109,6 +89,10 @@
       "Photoshop"
     ],
     "long_description": "An iOS app to empower creative minds by bettering focus and eliminating burnout.",
+    "hero": {
+      "alt": "3-up image of the proposed Circuit Mobile App",
+      "img": "/images/circuit_img/circuit.webp"
+    },
     "tools": [
       "Figma",
       "Photoshop"
@@ -117,7 +101,7 @@
       "https://to-come.html"
     ],
     "summary": "Circuit App is designed to address the unique time management challenges faced by creative professionals. It offers users a way to deal with the contradictory issues of distraction mitigation and preventing burnout from overworking. By structuring time into focused work periods and restful breaks, Circuit App aims to enhance productivity and creativity, while reducing stress and mental exhaustion.",
-    "summary_color": "rgba(254, 135, 36, 0.15)",
+    "summary_color": "rgba(252, 191, 143, 0.8)",
     "main_section": [
       {
         "title": "Problem:",

@@ -14,7 +14,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ title, desc, stack, slug, image }: ProjectCardProps) {
-  const { defaultImage, imageSource } = image;
+  const { defaultImage } = image;
   const id = createId();
 
   return (
@@ -31,8 +31,13 @@ export default function ProjectCard({ title, desc, stack, slug, image }: Project
         </div>
         <div className="project_card-image_wrap">
           <div className="image-placeholder">
-            <ExportedImage src={defaultImage.img} alt={defaultImage.alt} fill />
-            {/* <SingleImage imageSource={imageSource} defaultImage={defaultImage.img} altText={defaultImage.alt} /> */}
+            <ExportedImage
+              src={defaultImage.img}
+              alt={defaultImage.alt}
+              style={{ objectFit: "cover", backgroundColor: 'red', borderRadius: '20px' }}
+              priority
+              fill
+            />
           </div>
           <p className="project_card-cta">View Case Study <span className="project_card-cta-arrow"> →</span></p>
         </div>
