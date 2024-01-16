@@ -34,7 +34,7 @@ export default function ProjectCard({ title, desc, stack, slug, image }: Project
             <ExportedImage
               src={defaultImage.img}
               alt={defaultImage.alt}
-              style={{ objectFit: "cover", backgroundColor: 'red', borderRadius: '20px' }}
+              style={{ objectFit: "cover" }}
               priority
               fill
             />

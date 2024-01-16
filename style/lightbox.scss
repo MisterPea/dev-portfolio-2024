@@ -1,0 +1,121 @@
+@import "./mixins.scss";
+
+#lightbox-portal {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  // height: 100vh;
+  // width: 100%;
+  inset: 0;
+  opacity: 1;
+  z-index: 100;
+}
+
+body:has(#lightbox-portal) {
+  overflow: hidden;
+}
+
+.lightbox {
+  &-enter {
+    opacity: 0;
+    animation: animateLightbox 300ms ease forwards;
+  }
+  &-exit {
+    animation: animateLightboxOut 400ms ease-out forwards;
+  }
+  &-strip-ul {
+    scroll-snap-type: x mandatory;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 100vw;
+    list-style: none;
+  }
+  &-strip-li {
+    scroll-snap-align: start;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &-inner {
+      position: relative;
+      // position is set in jsx
+    }
+    p {
+      text-align: center;
+      margin: -15px 0 0;
+    }
+    img {
+      width: 100%;
+      flex: 1;
+      flex-shrink: 0;
+      height: 100%;
+      padding: 20px;
+    }
+  }
+  &-strip-image_group {
+    // background-color: rgba(0, 139, 139, 0.842);
+    // height: fit-content;
+  }
+  &-strip-nav {
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    z-index: 100;
+    &_arrows {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transition:
+        opacity 500ms ease-in-out,
+        visibility 500ms;
+    }
+    &-close {
+      position: absolute;
+      right: 0;
+    }
+
+    &-btn {
+      transition:
+        opacity 500ms ease-in-out,
+        visibility 500ms;
+      cursor: pointer;
+      pointer-events: all;
+    }
+    &_arrows-btn {
+      &--hide {
+        opacity: 0;
+        visibility: hidden;
+        &--show {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  @keyframes animateLightbox {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes animateLightboxOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

@@ -59,12 +59,14 @@
     // background-color: gray;
     margin: 0 auto;
     z-index: 10;
+    
     img {
       max-width: 100%;
       transition: all 300ms ease;
     }
   }
 
+  // Times Specific
   &-flowchart {
     section {
       margin-bottom: 0;
@@ -75,10 +77,38 @@
       width: 100%;
       margin: 0 auto;
       z-index: 10;
+      padding-bottom: 50%;
+
       img {
         max-width: 100%;
         height: fit-content;
         transition: all 300ms ease;
+      }
+    }
+  }
+
+  .nyt_extra {
+    ul {
+      display: flex;
+      list-style: none;
+      align-items: flex-start;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    li {
+      
+      flex:1;
+    
+      position: relative;
+      // display: block;
+      width: 100%;
+      margin: 0 auto;
+      z-index: 10;
+      height: 10rem;
+      // padding-bottom: 50%;
+      img {
+        max-width: 100%;
+        height: fit-content;
       }
     }
   }

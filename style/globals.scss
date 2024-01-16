@@ -6,6 +6,7 @@
 @import "./siteNav.scss";
 @import "./projectPages.scss";
 @import "./imageViewer.scss";
+@import "./lightbox.scss";
 
 html {
   box-sizing: border-box;
@@ -18,6 +19,7 @@ html {
 
 body {
   font-family: var(--font-lausanne);
+  scroll-behavior: smooth;
 }
 
 body,
