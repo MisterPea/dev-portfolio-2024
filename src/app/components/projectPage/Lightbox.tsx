@@ -1,8 +1,10 @@
 'use client';
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+import ExportedImage from "next-image-export-optimizer";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { createPortal } from 'react-dom';
-import createId from '../createId';
-import ExportedImage from 'next-image-export-optimizer';
+import ResponsiveImage, { ImageSize } from "./ResponsiveImage";
+import { SlClose, SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import useScrollStopped from "./useScrollStopped";
 
 type ImageRatio = {
   paddingBottom: string,
@@ -15,7 +17,7 @@ export type GalleryImage = {
   alt: string,
   blurData?: string,
   /** height to width ratio in percent */
-  ratio?: ImageRatio,
+  imageSize: ImageSize,
   description?: string,
 };
 
@@ -24,205 +26,161 @@ interface LightboxProps {
   imageArray: GalleryImage[];
 }
 
-interface LargeImageProps extends LightboxProps {
-  imageIndex: number;
-  updateIndex: Dispatch<SetStateAction<number>>;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-
-/**
- * Component to render the actual filmstrip gallery. Placed here for purpose of clarity.
- * @prop {GalleryImage[]} props.imageArray Array of images 
- * @prop {number} props.imageIndex Index of current image - state is handled by parent
- * @prop {Dispatch<SetStateAction<number>>} props.updateIndex - reference to the setState for image index
- * @prop {Dispatch<SetStateAction<boolean>>} props.setIsOpen - reference to the open/close lightbox setState
- */
-function LargeImage({ imageArray, imageIndex, updateIndex, setIsOpen }: LargeImageProps) {
+export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
+  const mountNode = useRef<HTMLDivElement>();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const galleryRef = useRef<HTMLUListElement>(null);
   const [xOffsets, setXOffsets] = useState<number[]>([]);
+  const [currIndex, setCurrIndex] = useState<number | undefined>(undefined);
   const firstRun = useRef<boolean>(true);
-  const numImages = imageArray.length;
-  const calledByButton = useRef<boolean>(false);
+  const calledFromButton = useRef<boolean>(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getGalleryRef = useCallback(() => galleryRef.current, [isOpen]);
+  const scrollStopped = useScrollStopped(getGalleryRef);
 
-  const handleScrollWatch = useCallback(() => {
-    if (calledByButton.current === false) {
-      const currScroll = galleryRef.current?.scrollLeft;
-      const newIndex = xOffsets.indexOf(currScroll!);
-      updateIndex(newIndex);
-    }
-  }, [xOffsets, updateIndex]);
-
-  useEffect(() => {
-    if (galleryRef.current) {
-      galleryRef.current.addEventListener('scrollend', handleScrollWatch);
-      const liArray = Array.from(galleryRef.current.querySelectorAll('li'));
-      setXOffsets(liArray.map((li) => li.offsetLeft));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (xOffsets.length) {
-      galleryRef.current?.scrollTo({
-        left: xOffsets[imageIndex],
-        behavior: firstRun.current ? 'instant' : 'smooth'
-      });
-      firstRun.current = false;
-      // reset after scrollTo executes
-      calledByButton.current = false;
-    }
-  }, [imageIndex, xOffsets]);
-
-  const handleClose = () => {
-    setXOffsets([]);
-    setIsOpen(false);
+  const handleOpen = (index: number) => {
+    setCurrIndex(index);
+    setIsOpen(true);
+    createDiv();
+    // Add a history state to deal with navigation away while in lightbox
+    window.history.pushState({ lightboxOpen: true }, '');
   };
-
-  const handleLeftNav = () => {
-    if (imageIndex > 0) {
-      updateIndex((i: number) => i - 1);
-      calledByButton.current = true;
-    }
-  };
-
-  const handleRightNav = () => {
-    if (imageIndex < imageArray.length - 1) {
-      updateIndex((i: number) => i + 1);
-      calledByButton.current = true;
-    }
-  };
-
-  return (
-    <div className='lightbox-strip-wrap'>
-      <nav className='lightbox-strip-nav'>
-        <button
-          onClick={handleClose}
-          className={`lightbox-strip-nav-btn lightbox-strip-nav-close${imageArray.length === 1 ? ' --single' : ''}`}>X</button>
-        <div className='lightbox-strip-nav_arrows'>
-          <button
-            onClick={handleLeftNav}
-            className={`lightbox-strip-nav-btn lightbox-strip-nav_arrows-btn${imageIndex === 0 ? '--hide' : '--show'}`}>{'<'}</button>
-          <button
-            onClick={handleRightNav}
-            className={`lightbox-strip-nav-btn lightbox-strip-nav_arrows-btn${imageIndex === numImages - 1 ? '--hide' : '--show'}`}>{'>'}</button>
-        </div>
-      </nav >
-      <ul ref={galleryRef} className='lightbox-strip-ul'>
-        {imageArray.map(({ alt, largeUrl, ratio, description }, index) => (
-          <li key={`${index}-${alt}`}
-            className='lightbox-strip-li'
-          >
-            <div className='lightbox-strip-li-inner' style={{ paddingBottom: ratio?.paddingBottom, width: ratio?.width }}>
-              <ExportedImage
-                src={largeUrl}
-                alt={alt}
-                fill
-                style={{ objectFit: 'scale-down' }}
-              />
-            </div>
-            {description && <p>{description}</p>}
-          </li>
-        ))}
-      </ul>
-    </div >
-  );
-}
-
-/**
- * 
- * @prop {GalleryImage[]} props.imageArray Array of GalleryImage types
- * @prop {string?} props.baseCssClass Optional string to append a custom CSS class to the lightbox
- * @returns 
- */
-export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [currIndex, setCurrIndex] = useState<number>(0);
-  const mountNode = useRef<HTMLDivElement | null>(null);
-  const id = createId();
-  /* console.log({ isMounted, isOpen, mountNode: mountNode.current }); */
 
   const createDiv = () => {
     const newDiv = document.createElement('div');
     const appRoot = document.querySelector('.app_wrap');
     newDiv.id = 'lightbox-portal';
     newDiv.className = 'lightbox-enter';
+    newDiv.style.opacity = '0';
     document.body.insertBefore(newDiv, appRoot);
     mountNode.current = newDiv;
-    setIsMounted(true);
   };
 
-  const handleOpen = (index: number) => {
-    setCurrIndex(index);
-    setIsOpen(true);
-  };
-
-  const handleButtonPress = useCallback((e: KeyboardEvent) => {
-    const keyPressed = e.key;
-    if (keyPressed === 'Escape') {
-      setIsOpen(false);
-    }
-    if (keyPressed === 'ArrowLeft') {
-      if (currIndex > 0) {
-        setCurrIndex((i) => i - 1);
-      }
-    }
-    if (keyPressed === 'ArrowRight') {
-      if (currIndex < imageArray.length - 1) {
-        setCurrIndex((i) => i + 1);
-      }
-    }
-  }, [currIndex, imageArray.length]);
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleButtonPress);
-    return () => {
-      document.removeEventListener('keydown', handleButtonPress);
-    };
-  }, [handleButtonPress]);
-
-  useEffect(() => {
-    if (isOpen) {
-      createDiv();
-    } else if (mountNode.current) {
-      const handleAnimationEnd = () => {
+  const handleClose = () => {
+    if (mountNode.current) {
+      const handleDivRemoval = () => {
+        setCurrIndex(undefined);
+        firstRun.current = true;
+        galleryRef.current?.remove();
         mountNode.current?.remove();
-        mountNode.current = null;
-        setIsMounted(false);
+        setIsOpen(false);
       };
-
-      // Add the animation end event listener
-      mountNode.current.addEventListener('animationend', handleAnimationEnd, { once: true });
-
-      // Start the exit animation
-      mountNode.current.className = 'lightbox-exit';
-
-      // Cleanup function
-      return () => {
-        if (mountNode.current) {
-          mountNode.current.removeEventListener('animationend', handleAnimationEnd);
-          mountNode.current.remove();
-          mountNode.current = null;
-        }
-      };
+      mountNode.current.addEventListener('transitionend', handleDivRemoval, { once: true });
+      mountNode.current.style.opacity = '0';
     }
-  }, [isOpen]);
+  };
 
+  // ****************** Navigation ****************** //
+  const handleLeftNav = useCallback(() => {
+    if (typeof currIndex === 'number' && currIndex > 0) {
+      setCurrIndex((i) => i === undefined ? 0 : i - 1);
+      calledFromButton.current = true;
+    }
+  }, [currIndex]);
+
+  const handleRightNav = useCallback(() => {
+    if (typeof currIndex === 'number' && currIndex < imageArray.length - 1) {
+      setCurrIndex((i) => i === undefined ? imageArray.length - 1 : i + 1);
+      calledFromButton.current = true;
+    }
+  }, [currIndex, imageArray]);
+
+  useEffect(() => {
+    const handleButtonPress = (e: KeyboardEvent) => {
+      const keyPressed = e.key;
+      if (keyPressed === 'Escape') handleClose();
+      if (keyPressed === 'ArrowLeft') handleLeftNav();
+      if (keyPressed === 'ArrowRight') handleRightNav();
+    };
+
+    document.addEventListener('keydown', handleButtonPress);
+    return () => document.removeEventListener('keydown', handleButtonPress);
+  }, [handleLeftNav, handleRightNav]);
+
+  // **************** Find xOffsets **************** //
+  // Get reference to the ul so we can measure the xOffsets
+  // We need to measure initially and on resize
+  useEffect(() => {
+    const measureOffset = () => {
+      if (galleryRef.current) {
+        const liArray = Array.from(galleryRef.current.querySelectorAll('li'));
+        setXOffsets(liArray.map((li) => li.offsetLeft));
+      }
+    };
+    measureOffset();
+    window.addEventListener('resize', measureOffset);
+    return () => window.removeEventListener('resize', measureOffset);
+  }, [getGalleryRef]);
+
+  // *********** Update index if scrolled *********** //
+  useEffect(() => {
+    if (scrollStopped) {
+      if (calledFromButton.current === false && galleryRef.current) {
+        const currScroll = galleryRef.current.scrollLeft;
+        const newIndex = xOffsets.indexOf(currScroll);
+        setCurrIndex(newIndex);
+      }
+    }
+  }, [scrollStopped, xOffsets]);
+
+  // ********** Nav - index change listen ********** // 
+  useEffect(() => {
+    // Implicitly showing the proper image.
+    if (xOffsets.length && currIndex !== undefined && galleryRef.current) {
+      galleryRef.current.scrollTo({
+        left: xOffsets[currIndex],
+        behavior: firstRun.current ? 'instant' : 'smooth'
+      });
+      if (firstRun.current && mountNode.current) {
+        mountNode.current.style.opacity = '1';
+      }
+      firstRun.current = false;
+      calledFromButton.current = false;
+    }
+  }, [currIndex, xOffsets]);
 
   return (
     <>
-      {isMounted && mountNode.current ? createPortal(
-        <LargeImage
-          imageArray={imageArray}
-          imageIndex={currIndex}
-          updateIndex={setCurrIndex}
-          setIsOpen={setIsOpen}
-        />, mountNode.current
-      ) : null}
+      {isOpen && mountNode.current && createPortal(
+        <>
+          <div>
+            <nav className='lightbox-strip-nav'>
+              <button
+                onClick={handleClose}
+                className={`lightbox-strip-nav-btn lightbox-strip-nav-close${imageArray.length === 1 ? ' --single' : ''}`}>
+                <SlClose />
+              </button>
+              <div className='lightbox-strip-nav_arrows'>
+                <button
+                  onClick={handleLeftNav}
+                  className={`lightbox-strip-nav-btn btn_left lightbox-strip-nav_arrows-btn${currIndex === 0 ? '--hide' : '--show'}`}>
+                  <SlArrowLeft />
+                </button>
+                <button
+                  onClick={handleRightNav}
+                  className={`lightbox-strip-nav-btn btn_right lightbox-strip-nav_arrows-btn${currIndex === imageArray.length - 1 ? '--hide' : '--show'}`}>
+                  <SlArrowRight />
+                </button>
+              </div>
+            </nav >
+            <ul key="ul-wrap" ref={galleryRef} className='lightbox-strip-ul'>
+              {imageArray.map(({ alt, largeUrl, imageSize, description }, index) => (
+                <li key={`image-${alt}-li`} className='lightbox-strip-li'>
+                  <ResponsiveImage
+                    src={largeUrl}
+                    alt={alt}
+                    imageSize={imageSize}
+                    key={`image-${alt}-img`}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>, mountNode.current)}
       <div className={`${baseCssClass ? baseCssClass + ' ' : ''}lightbox-wrap`}>
         <ul className='lightbox-ul'>
           {imageArray.map(({ smallUrl, alt }, index) => (
-            <li key={`${id}-${index}`}
+            <li key={`${alt}-${index}`}
               onClick={handleOpen.bind(null, index)}
               role='button'
             >
@@ -231,6 +189,8 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
                 alt={alt}
                 fill
                 style={{ objectFit: "contain" }}
+                priority
+                key={alt}
               />
             </li>
           ))}

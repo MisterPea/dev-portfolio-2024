@@ -5,7 +5,7 @@ $tablet: 1100px;
 $desktop: 1024px;
 
 @mixin hi-dpi-mobile {
-  @media (min-resolution: 192dpi) and (max-width: 767px) and (max-device-width: 767px) {
+  @media only screen and (min-resolution: 192dpi) and (max-width: 767px) and (max-device-width: 767px) {
     @content;
   }
 }
@@ -36,7 +36,7 @@ $desktop: 1024px;
 
 @mixin milk-blur {
   // background-color: rgba(255, 255, 255, 0.8);
-  background: linear-gradient(180deg, rgba(255,255,255,1) 10%, rgba(255,255,255,0.70) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0.7) 100%);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
 }
@@ -44,5 +44,5 @@ $desktop: 1024px;
 @mixin unset-milk-blur {
   background: unset;
   -webkit-backdrop-filter: none;
-  backdrop-filter:none;
+  backdrop-filter: none;
 }

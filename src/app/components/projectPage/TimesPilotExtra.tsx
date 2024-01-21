@@ -3,8 +3,7 @@ import { SvgFonts } from "@/app/components/projectPage/SvgFonts";
 import SectionTextBlock from "./SectionTextBlock";
 import ExportedImage from "next-image-export-optimizer";
 import flowchart from "../../../../public/images/nyt_pilot_img/nyt_pilot_flowchart.webp";
-import Lightbox, { GalleryImage } from "./Lightbox";
-import LightboxTwo from "./LightboxTwo";
+import Lightbox from "./Lightbox";
 
 export default function TimesPilotExtra() {
   const colors: ColorSwatchType[] = [
@@ -54,14 +53,14 @@ export default function TimesPilotExtra() {
       smallUrl: '/images/test/test_landscape_1.jpg',
       largeUrl: '/images/test/test_landscape_1.jpg',
       alt: 'test image 1',
-      ratio: { paddingBottom: '73.5%', width: '100%' },
+      imageSize: { width: 1100, height: 809 },
       description: 'Thumbs up/thumbs down'
     },
     {
       smallUrl: '/images/test/test_portrait_1.jpg',
       largeUrl: '/images/test/test_portrait_1.jpg',
       alt: 'test image 2',
-      ratio: { paddingBottom: '100%', width: '70%' }
+      imageSize: { width: 1365, height: 2048 },
     },
     // {
     //   smallUrl: '/images/test/test_landscape_2.jpg',
@@ -142,8 +141,7 @@ export default function TimesPilotExtra() {
       <SectionTextBlock title="Desktop Article Card versus Mobile Article Card:"
         body="Because interaction with mobile is done with fingers (not a pointer) and space is at a premium, the mobile implementation of bookmarks uses modified placement of the bookmark flag, and a slide-to-reveal interaction. A common and, now, natural interaction on mobile devices."
       />
-      <LightboxTwo imageArray={testImages} baseCssClass='nyt_extra'/>
-      {/* <Lightbox baseCssClass='nyt_extra' imageArray={testImages} /> */}
+      <Lightbox imageArray={testImages} baseCssClass='nyt_extra' />
     </>
   );
 }
