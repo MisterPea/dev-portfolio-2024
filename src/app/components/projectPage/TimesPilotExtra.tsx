@@ -3,7 +3,7 @@ import { SvgFonts } from "@/app/components/projectPage/SvgFonts";
 import SectionTextBlock from "./SectionTextBlock";
 import ExportedImage from "next-image-export-optimizer";
 import flowchart from "../../../../public/images/nyt_pilot_img/nyt_pilot_flowchart.webp";
-import Lightbox from "./Lightbox";
+import Lightbox, { GalleryImage } from "./Lightbox";
 
 export default function TimesPilotExtra() {
   const colors: ColorSwatchType[] = [

@@ -6,11 +6,6 @@ import ResponsiveImage, { ImageSize } from "./ResponsiveImage";
 import { SlClose, SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import useScrollStopped from "./useScrollStopped";
 
-type ImageRatio = {
-  paddingBottom: string,
-  width: string;
-};
-
 export type GalleryImage = {
   smallUrl: string,
   largeUrl: string,
