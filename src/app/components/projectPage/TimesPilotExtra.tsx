@@ -62,11 +62,13 @@ export default function TimesPilotExtra() {
       alt: 'test image 2',
       imageSize: { width: 1365, height: 2048 },
     },
-    // {
-    //   smallUrl: '/images/test/test_landscape_2.jpg',
-    //   largeUrl: '/images/test/test_landscape_2.jpg',
-    //   alt: 'test image 3'
-    // },
+    {
+      smallUrl: '/images/test/test_landscape_1.jpg',
+      largeUrl: '/images/test/test_landscape_1.jpg',
+      alt: 'test image 1a',
+      imageSize: { width: 1100, height: 809 },
+      description: 'Second thumbs up/thumbs down'
+    },
     // {
     //   smallUrl: '/images/test/test_portrait_2.jpg',
     //   largeUrl: '/images/test/test_portrait_2.jpg',

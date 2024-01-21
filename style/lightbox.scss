@@ -34,7 +34,6 @@ body:has(#lightbox-portal) {
       top: 50%;
       transform: translateY(-50%);
       max-height: 100vh;
-      background-color: khaki;
       p {
         text-align: center;
         font-size: 0.75rem;
@@ -42,9 +41,15 @@ body:has(#lightbox-portal) {
         color: var(--dark-2);
       }
     }
+    .image_text-clickable {
+      pointer-events: all;
+      z-index: 101;
+      opacity: 0.1;
+      cursor: pointer;
+    }
+   
   }
 }
-
 
 .lightbox-strip-nav {
   &-close {
@@ -57,6 +62,15 @@ body:has(#lightbox-portal) {
     height: 2.5rem;
     width: 2.5rem;
     color: var(--dark-4);
+    z-index: 100;
+    background-color: white;
+    border-radius: 50%;
+    transition: opacity 300ms ease-in-out;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.7;
+      }
+    }
     svg {
       height: 100%;
       width: 100%;
@@ -64,7 +78,6 @@ body:has(#lightbox-portal) {
     @include hi-dpi-mobile {
       height: 50px;
       width: 50px;
-
     }
   }
   &_arrows {
@@ -75,13 +88,15 @@ body:has(#lightbox-portal) {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    pointer-events: none;
     &-btn--show,
     &-btn--hide {
       transition:
         300ms opacity ease-in-out,
-        300ms transform ease-in-out;
+        500ms transform  cubic-bezier(0.86, 0, 0.07, 1);
     }
   }
+
   .btn_right {
     svg {
       margin-left: 1px;
@@ -89,11 +104,9 @@ body:has(#lightbox-portal) {
     &[class*="--show"] {
       opacity: 1;
       cursor: pointer;
-      transform: translateX(-1.5rem);
     }
     &[class*="--hide"] {
       opacity: 0;
-      transform: translateX(3rem);
     }
   }
   .btn_left {
@@ -103,28 +116,26 @@ body:has(#lightbox-portal) {
     &[class*="--show"] {
       opacity: 1;
       cursor: pointer;
-      transform: translateX(1.5rem);
     }
     &[class*="--hide"] {
       opacity: 0;
-      transform: translateX(-3rem);
     }
   }
 
   .btn_left,
   .btn_right {
-    // box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 8px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1.5px 5px;
     height: 2rem;
     width: 2rem;
     background: none;
     background-color: white;
     border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.337);
-    mix-blend-mode:difference;
+    border: 0.2px solid rgba(0, 0, 0, 0.125);
+    mix-blend-mode: difference;
     svg {
       height: 100%;
       width: 100%;
-      padding: 2px;
+      padding: 6px;
     }
   }
   @media (hover: none) {
@@ -133,104 +144,3 @@ body:has(#lightbox-portal) {
     }
   }
 }
-
-// .lightbox {
-//   &-strip-nav {
-//     position: absolute;
-//     pointer-events: none;
-//     inset: 0;
-//     z-index: 100;
-//     &_arrows {
-//       display: flex;
-//       justify-content: space-between;
-//       width: 100%;
-//       position: absolute;
-//       top: 50%;
-//       transition:
-//         opacity 500ms ease-in-out,
-//         visibility 500ms;
-//     }
-//     &-close {
-//       position: absolute;
-//       right: 1rem;
-//       top: 1rem;
-//       opacity: 0;
-//       transition: opacity 500ms ease-in-out;
-//     }
-
-//     &-btn {
-//       cursor: pointer;
-//       pointer-events: all;
-//       padding: 0;
-//       height: 1.5rem;
-//       width: 1.5rem;
-//       border: none;
-//       background: none;
-//       opacity: 1;
-//       // transition:
-//         // opacity 500ms ease-in-out,
-//         // visibility 500ms;
-//       &:hover {
-//         opacity: 0.65;
-//       }
-//       svg {
-//         height: 100%;
-//         width: 100%;
-//         color: var(--dark-1);
-//       }
-//       &.btn_left {
-//         height: 6rem;
-//         width: 5rem;
-//         padding: 1.75rem;
-//         transform: translate(-1.5rem, -3rem);
-//         transition:
-//           transform 900ms cubic-bezier(0, 0.5, 0.4, 1),
-//           opacity 500ms ease-in-out;
-//         &:hover {
-//           transform: translate(-1.25rem, -3rem);
-//         }
-//       }
-//       &.btn_right {
-//         height: 6rem;
-//         width: 5rem;
-//         padding: 1.75rem;
-//         transform: translate(1.5rem, -3rem);
-//         transition:
-//           transform 900ms cubic-bezier(0, 0.5, 0.4, 1),
-//           opacity 500ms ease-in-out;
-//         &:hover {
-//           transform: translate(1.25rem, -3rem);
-//         }
-//       }
-//     }
-
-//     &_arrows-btn {
-//       &--hide {
-//         opacity: 0;
-//         visibility: hidden;
-//       }
-//       &--show {
-//         opacity: 1;
-//         visibility: visible;
-//       }
-//     }
-//   }
-
-//   @keyframes animateLightbox {
-//     0% {
-//       opacity: 0;
-//     }
-//     100% {
-//       opacity: 1;
-//     }
-//   }
-
-//   @keyframes animateLightboxOut {
-//     0% {
-//       opacity: 1;
-//     }
-//     100% {
-//       opacity: 0;
-//     }
-//   }
-// }

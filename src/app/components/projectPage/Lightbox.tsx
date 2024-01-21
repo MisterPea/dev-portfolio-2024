@@ -32,6 +32,8 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getGalleryRef = useCallback(() => galleryRef.current, [isOpen]);
   const scrollStopped = useScrollStopped(getGalleryRef);
+  const leftBtnRef = useRef<HTMLDivElement>(null);
+  const rightBtnRef = useRef<HTMLDivElement>(null);
 
   const handleOpen = (index: number) => {
     setCurrIndex(index);
@@ -79,6 +81,14 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
       calledFromButton.current = true;
     }
   }, [currIndex, imageArray]);
+
+  // ** Handler for clicks - from ResponsiveImage Component ** //
+  const handleInnerClicks = (direction: 'prev' | 'next') => {
+    if (direction === 'prev') {
+      return handleLeftNav();
+    }
+    return handleRightNav();
+  };
 
   useEffect(() => {
     const handleButtonPress = (e: KeyboardEvent) => {
@@ -146,26 +156,32 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
                 <SlClose />
               </button>
               <div className='lightbox-strip-nav_arrows'>
-                <button
-                  onClick={handleLeftNav}
+                <div
+                  // onClick={handleLeftNav}
+                  ref={leftBtnRef}
                   className={`lightbox-strip-nav-btn btn_left lightbox-strip-nav_arrows-btn${currIndex === 0 ? '--hide' : '--show'}`}>
                   <SlArrowLeft />
-                </button>
-                <button
-                  onClick={handleRightNav}
+                </div>
+                <div
+                  // onClick={handleRightNav}
+                  ref={rightBtnRef}
                   className={`lightbox-strip-nav-btn btn_right lightbox-strip-nav_arrows-btn${currIndex === imageArray.length - 1 ? '--hide' : '--show'}`}>
                   <SlArrowRight />
-                </button>
+                </div>
               </div>
             </nav >
             <ul key="ul-wrap" ref={galleryRef} className='lightbox-strip-ul'>
-              {imageArray.map(({ alt, largeUrl, imageSize, description }, index) => (
+              {imageArray.map(({ alt, largeUrl, imageSize, description }) => (
                 <li key={`image-${alt}-li`} className='lightbox-strip-li'>
                   <ResponsiveImage
                     src={largeUrl}
                     alt={alt}
+                    description={description}
                     imageSize={imageSize}
+                    clickHandler={handleInnerClicks}
                     key={`image-${alt}-img`}
+                    leftBtnRef={leftBtnRef}
+                    rightBtnRef={rightBtnRef}
                   />
                 </li>
               ))}
