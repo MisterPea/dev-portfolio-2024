@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, RefObject } from 'react';
 import ExportedImage from 'next-image-export-optimizer';
+import ClickableAreas from './ClickableArea';
 
 export type ImageSize = {
   width: number,
@@ -30,7 +31,6 @@ export default function ResponsiveImage({ src, alt, description, imageSize, clic
       if (imgWrapRef.current && textRef.current) {
 
         const image_text = imgWrapRef.current;
-        const text = textRef.current;
 
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
@@ -44,85 +44,26 @@ export default function ResponsiveImage({ src, alt, description, imageSize, clic
           newHeight = viewportWidth / aspectRatio;
         }
 
-        const padding = imageSize.height * 0.007;
-        const negativeMargin = -2;
-
         image_text.style.width = `${Math.min(newWidth, imageSize.width)}px`;
         image_text.style.height = `${Math.min(newHeight, imageSize.height)}px`;
-        image_text.style.padding = `${padding}px ${padding}px ${padding + 10}px`;
-        text.style.marginTop = `${negativeMargin}px`;
       }
     };
-
     // Adjust on initial load
     adjustAspectRatio();
-
     // Adjust on window resize
     window.addEventListener('resize', adjustAspectRatio);
-
     // Cleanup listener when component unmounts
     return () => window.removeEventListener('resize', adjustAspectRatio);
   }, [imageSize]);
 
-
-  // Convenience component to abstract out the hit areas
-  /*  
-  This is done so we can move the click action away from the arrow button, and
-  turn the whole half of the image into a button. The problem is the image size
-  is dynamic, so to have access we have to create the button on the image layer 
-  and pass the references to the button action into it (the button). 
-  */
-  interface ClickableAreaProps {
-    side: 'left' | 'right';
-    elemToModify: any;
-  }
-  const ClickableArea = ({ side, elemToModify }: ClickableAreaProps) => {
-    const clickableRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-      const moveTo = side === 'left' ? 1 : -1;
-      const hoverOn = () => {
-        if (elemToModify.current) {
-          elemToModify.current.style.transform = `translateX(${moveTo * 19}px)`;
-        }
-      };
-      const hoverOff = () => {
-        if (elemToModify.current) {
-          elemToModify.current.style.transform = `translateX(${moveTo * 25}px)`;
-        }
-      };
-      const clickableRefLocal = clickableRef.current;
-
-      if (clickableRefLocal) {
-        clickableRefLocal.addEventListener('mouseover', hoverOn);
-        clickableRefLocal.addEventListener('mouseout', hoverOff);
-      }
-      return () => {
-        clickableRefLocal?.removeEventListener('mouseover', hoverOn);
-        clickableRefLocal?.removeEventListener('mouseout', hoverOff);
-      };
-    }, [elemToModify, side]);
-
-    const direction = side === 'left' ? 'prev' : 'next';
-
-    return (
-      <div
-        ref={clickableRef}
-        className={`image_text-clickable ${side}`}
-        style={{ flex: 1, height: '100%' }}
-        onClick={clickHandler.bind(null, direction)}
-        role='button'
-      />
-    );
-  };
-
-
   return (
     <>
-      <div ref={imgWrapRef} className='image_text-wrap'>
-        <div className='button-hold' style={{ position: 'absolute', display: 'flex', inset: 0 }}>
-          <ClickableArea side='left' elemToModify={leftBtnRef} />
-          <ClickableArea side='right' elemToModify={rightBtnRef} />
-        </div >
+      <div ref={imgWrapRef} className='image_text-wrap' style={{ width: '100vw' }} >
+        <ClickableAreas
+          leftBtnRef={leftBtnRef}
+          rightBtnRef={rightBtnRef}
+          clickHandler={clickHandler}
+        />
         <ExportedImage
           src={src}
           style={{
@@ -139,7 +80,6 @@ export default function ResponsiveImage({ src, alt, description, imageSize, clic
         />
         <p ref={textRef}>{description ? description : ''}</p>
       </div>
-
     </>
   );
 };

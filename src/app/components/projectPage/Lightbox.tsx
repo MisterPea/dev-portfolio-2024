@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import ResponsiveImage, { ImageSize } from "./ResponsiveImage";
 import { SlClose, SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import useScrollStopped from "./useScrollStopped";
+import ClickableAreas from "./ClickableArea";
 
 export type GalleryImage = {
   smallUrl: string,
@@ -19,9 +20,10 @@ export type GalleryImage = {
 interface LightboxProps {
   baseCssClass?: string;
   imageArray: GalleryImage[];
+  children?: React.ReactNode;
 }
 
-export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
+export default function Lightbox({ imageArray, baseCssClass, children }: LightboxProps) {
   const mountNode = useRef<HTMLDivElement>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const galleryRef = useRef<HTMLUListElement>(null);
@@ -66,6 +68,16 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
       mountNode.current.style.opacity = '0';
     }
   };
+
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      if (isOpen && (!e.state || !e.state.lightboxOpen)) {
+        handleClose();
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [isOpen]);
 
   // ****************** Navigation ****************** //
   const handleLeftNav = useCallback(() => {
@@ -144,6 +156,8 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
     }
   }, [currIndex, xOffsets]);
 
+
+
   return (
     <>
       {isOpen && mountNode.current && createPortal(
@@ -157,13 +171,15 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
               </button>
               <div className='lightbox-strip-nav_arrows'>
                 <div
-                  // onClick={handleLeftNav}
+                  role="button"
+                  onClick={handleLeftNav}
                   ref={leftBtnRef}
                   className={`lightbox-strip-nav-btn btn_left lightbox-strip-nav_arrows-btn${currIndex === 0 ? '--hide' : '--show'}`}>
                   <SlArrowLeft />
                 </div>
                 <div
-                  // onClick={handleRightNav}
+                  role="button"
+                  onClick={handleRightNav}
                   ref={rightBtnRef}
                   className={`lightbox-strip-nav-btn btn_right lightbox-strip-nav_arrows-btn${currIndex === imageArray.length - 1 ? '--hide' : '--show'}`}>
                   <SlArrowRight />
@@ -185,8 +201,11 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
                   />
                 </li>
               ))}
+
             </ul>
+            {/* <ClickableAreas leftBtnRef={leftBtnRef} rightBtnRef={rightBtnRef} clickHandler={handleInnerClicks} /> */}
           </div>
+
         </>, mountNode.current)}
       <div className={`${baseCssClass ? baseCssClass + ' ' : ''}lightbox-wrap`}>
         <ul className='lightbox-ul'>
@@ -194,19 +213,21 @@ export default function Lightbox({ imageArray, baseCssClass }: LightboxProps) {
             <li key={`${alt}-${index}`}
               onClick={handleOpen.bind(null, index)}
               role='button'
+              className={`${baseCssClass ? baseCssClass + '-li ' : ''}li_element${index + 1}`}
             >
               <ExportedImage
                 src={smallUrl}
                 alt={alt}
                 fill
-                style={{ objectFit: "contain" }}
+                style={{ objectFit:"contain" }}
                 priority
                 key={alt}
               />
             </li>
           ))}
+          {children && children}
         </ul>
       </div>
     </>
   );
-}
+} 

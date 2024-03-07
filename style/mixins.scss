@@ -46,3 +46,15 @@ $desktop: 1024px;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
+
+@mixin h2_text {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: normal;
+}
+
+@mixin paragraph_text {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  letter-spacing: 0.01rem;
+}

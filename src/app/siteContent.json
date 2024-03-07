@@ -1,7 +1,8 @@
 [
   {
     "slug": "the-times-pilot",
-    "title": "the.times.pilot: Tailoring Your NY Times Digest",
+    "title": "the.times.pilot:",
+    "title_two":"Tailoring Your NY Times Digest",
     "image_url": {
       "defaultImage": {
         "alt": "The times.pilot app shown on desktop and mobile devices",
@@ -40,7 +41,7 @@
       "https://github.com/MisterPea/times-pilot"
     ],
     "summary": "the.times.pilot aims to improve the news consumption experience by offering a personalized, accessible, and navigable platform that leverages the New York Times Top-Stories API. It addresses the lack of personalization and a one-size-fits-all approach present in the news media, specifically for The New York Times readers.",
-    "summary_color": "rgba(204, 255, 0, 0.6)",
+    "summary_color": "#718217",
     "main_section": [
       {
         "title": "Problem:",
@@ -49,8 +50,12 @@
       },
       {
         "title": "User Research:",
-        "body": "Investigations reveal users' frustration with being forced to browse through topics they felt to be overwhelming, and often depressing. The research highlighted a desire for a more tailored news / news email experience.",
-        "list_items": []
+        "body": "Investigations reveal users' frustration with being forced to browse through topics they felt to be overwhelming, and often depressing. The research highlighted a desire for a more tailored news / news-email experience. Some specific problems were:",
+        "list_items": [
+          "Lack of customization (NY Times doesn't provide a way to have a user organized news homepage).",
+          "There is no way to customize the daily top-stories emails.",
+          "Exposure to topics ill-fitting to their tastes.",
+          "The news is too depressing to look at all the time."]
       },
       {
         "title": "Goals / Objectives:",

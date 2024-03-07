@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 interface Project {
   slug: string;
   title: string;
+  title_two: string;
   hero: DefaultImage;
   image_url: ImageUrl;
   description: string;
@@ -41,7 +42,8 @@ interface MainSection {
 
 export default function Page({ params }: { params: { slug: string; }; }) {
   const project: Project = siteContent.find((p) => p.slug === params.slug) as unknown as Project;
-  const { title, long_description, tools, links, summary, summary_color, main_section, hero } = project;
+  const { title, title_two, long_description, tools, links, summary, summary_color, main_section, hero } = project;
+
   const CustomComponent = DynamicComponent();
 
   function DynamicComponent() {
@@ -57,9 +59,43 @@ export default function Page({ params }: { params: { slug: string; }; }) {
 
   return (
     <div className="project_page">
-      <div className="project_page-header">
+      <header>
+        <div className="project_page-title">
+          <h1>{title}
+            {title_two && <span>{` ${title_two}`}</span>}
+          </h1>
+          <p className="project_page-description">{long_description}</p>
+        </div>
+        <div className="project_page-hero">
+          <ExportedImage
+            src={hero.img}
+            alt={hero.alt}
+            fill
+            style={{ objectFit: "contain" }}
+            priority
+          />
+        </div>
+        <section className="project_page-section tools">
+          <h2>Tools:</h2>
+          <p>{tools.join(', ')}</p>
+        </section>
+        <section className="project_page-section links">
+          <h2>Links:</h2>
+          <ul>
+            {links.map((link, index) => (
+              <li key={`link-${index}-${link}`}>
+                <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </header>
+
+      {/* <div className="project_page-header">
         <div className="project_page-header-text">
-          <h1 className="project_page-title">{title}</h1>
+          <h1 className="project_page-title">{title}
+            {title_two && <span>{` ${title_two}`}</span>}
+          </h1>
           <p className="project_page-description">{long_description}</p>
         </div>
         <div className="project_page-hero">
@@ -72,36 +108,36 @@ export default function Page({ params }: { params: { slug: string; }; }) {
             priority
           />
         </div>
-      </div>
-      <section className="project_page-section tools">
-        <h2>Tools:</h2>
-        <p>{tools.join(', ')}</p>
-      </section>
-      <section className="project_page-section links">
-        <h2>Links:</h2>
-        <ul>
-          {links.map((link, index) => (
-            <li key={`link-${index}-${link}`}>
-              <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
-            </li>
+        <section className="project_page-section tools">
+          <h2>Tools:</h2>
+          <p>{tools.join(', ')}</p>
+        </section>
+        <section className="project_page-section links">
+          <h2>Links:</h2>
+          <ul>
+            {links.map((link, index) => (
+              <li key={`link-${index}-${link}`}>
+                <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div> */}
+      <div className="project_page-lower_grid">
+        {/* <section
+          className="summary"
+          style={{ border: `1px solid ${summary_color}` }}>
+          <h3>Summary:</h3>
+          <p>{summary}</p>
+        </section> */}
+        <>
+          {main_section.map(({ title, list_items, body }, index) => (
+            <SectionTextBlock title={title} list_items={list_items} body={body} key={`${index}-main-section`} />
           ))}
-        </ul>
-      </section>
-      <section
-        className="project_page-section summary"
-        style={{ backgroundColor: `${summary_color}` }}>
-        <h2>Summary:</h2>
-        <p>{summary}</p>
-      </section>
-      <>
-        {main_section.map(({ title, list_items, body }, index) => (
-          <SectionTextBlock title={title} list_items={list_items} body={body} key={`${index}-main-section`} />
-        ))}
-      </>
-      <div className="rule">
-        <hr />
+        </>
+        <div className="rule" />
+        {/* {CustomComponent && <CustomComponent />} */}
       </div>
-      {CustomComponent && <CustomComponent />}
     </div>
   );
 }
